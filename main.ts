@@ -1,5 +1,5 @@
-function handler(req: Request): Response {
-  const text = Array.from(req.headers.entries())
+Deno.serve((req, info) => {
+  const text = [...req.headers.entries(), ["info.remote-addr", info.remoteAddr]]
     .map(([k, v]) => `${k}: ${v}\n`)
     .join("");
 
@@ -10,6 +10,4 @@ function handler(req: Request): Response {
       "content-type": "text/plain; charset=UTF-8",
     },
   });
-}
-
-Deno.serve(handler);
+});

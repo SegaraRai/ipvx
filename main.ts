@@ -1,5 +1,8 @@
 Deno.serve((req, info) => {
-  const text = [...req.headers.entries(), ["info.remote-addr", info.remoteAddr]]
+  const text = [
+    ...req.headers.entries(),
+    ["info.remote-addr", JSON.stringify(info.remoteAddr)],
+  ]
     .map(([k, v]) => `${k}: ${v}\n`)
     .join("");
 
